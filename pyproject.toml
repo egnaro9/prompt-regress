@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prompt-regress"
+version = "0.1.0"
+description = "A does-my-prompt-still-work merge gate: gate a PR's eval run against the main baseline in eval-history and block on regression."
+requires-python = ">=3.11"
+dependencies = []
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+prompt-regress = "promptregress.cli:main"
+
+[tool.setuptools]
+packages = ["promptregress"]

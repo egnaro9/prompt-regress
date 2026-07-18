@@ -1,0 +1,32 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+      - name: The client reaches the live eval-history read path
+        run: |
+          python - <<'PY'
+          from promptregress.client import HttpEvalHistory
+          from promptregress.gate import _pick_baseline
+          runs = HttpEvalHistory("https://eval-history.onrender.com").list_runs("rag-eval-lab", limit=10)
+          assert isinstance(runs, list)
+          # a baseline is pickable (or None), and only ci runs qualify
+          b = _pick_baseline(runs, "x")
+          assert b is None or b.get("source") == "ci"
+          print(f"OK: {len(runs)} runs, baseline={'none' if not b else b['git_sha']}")
+          PY
