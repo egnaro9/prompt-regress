@@ -19,6 +19,15 @@ prompt-regress fills it, on top of [eval-history](https://github.com/egnaro9/eva
      PR eval_run.json ──►  eval-history  ──►  compare vs main baseline  ──►  🔴 blocks merge
 ```
 
+<img src="https://raw.githubusercontent.com/egnaro9/rag-eval-lab/main/docs/demo.gif" alt="rag-eval-lab's harness catching a planted hallucination at faithfulness 0.5" width="100%">
+
+*This gate blocks on a regression; it does not decide what a regression is. That judgement is made
+upstream, and this is upstream: [rag-eval-lab](https://github.com/egnaro9/rag-eval-lab) grading a
+suite and flagging the one answer its sources do not support. The run it produces is what
+[eval-history](https://github.com/egnaro9/eval-history) stores and compares, and what this gate
+reads a verdict from. [Play it as a terminal session](https://asciinema.org/a/k0m7dOqwWt1kdSlx).*
+
+
 ## Use it — GitHub Action
 
 ```yaml
