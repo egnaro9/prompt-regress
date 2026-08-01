@@ -1,10 +1,10 @@
 # prompt-regress
 
+**A "does-my-prompt-still-work" merge gate. Run your eval on every PR, compare it to the main-branch baseline, and block the merge if answers got worse.**
+
 [![ci](https://github.com/egnaro9/prompt-regress/actions/workflows/ci.yml/badge.svg)](https://github.com/egnaro9/prompt-regress/actions/workflows/ci.yml)
 [![python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)](https://www.python.org/)
 [![tests](https://img.shields.io/badge/tests-7-brightgreen)](tests)
-
-**A "does-my-prompt-still-work" merge gate. Run your eval on every PR, compare it to the main-branch baseline, and block the merge if answers got worse.**
 
 An LLM eval tells you how the system does *today*. What breaks a product is a prompt tweak or a model bump that quietly makes *some* answers worse while the average holds — and no error fires. [promptfoo](https://promptfoo.dev), the popular eval runner, [doesn't store history or compare across runs](https://www.promptfoo.dev/docs/configuration/parameters/) (its self-hosted store is "experimental, not recommended for production"). So there's a gap: **nothing gates a PR on "did this change make the evals worse?"**
 
@@ -26,7 +26,6 @@ upstream, and this is upstream: [rag-eval-lab](https://github.com/egnaro9/rag-ev
 suite and flagging the one answer its sources do not support. The run it produces is what
 [eval-history](https://github.com/egnaro9/eval-history) stores and compares, and what this gate
 reads a verdict from. [Play it as a terminal session](https://asciinema.org/a/k0m7dOqwWt1kdSlx).*
-
 
 ## Use it — GitHub Action
 
