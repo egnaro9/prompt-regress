@@ -18,12 +18,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev]"
       - run: pytest -q
-      - name: The client reaches the live eval-history read path
+      - name: The client reaches the eval-history read path (static archive)
         run: |
           python - <<'PY'
-          from promptregress.client import HttpEvalHistory
+          from promptregress.client import client_for
           from promptregress.gate import _pick_baseline
-          runs = HttpEvalHistory("https://eval-history.onrender.com").list_runs("rag-eval-lab", limit=10)
+          runs = client_for("https://erikhill.dev/eval-history/").list_runs("rag-eval-lab", limit=10)
           assert isinstance(runs, list)
           # a baseline is pickable (or None), and only ci runs qualify
           b = _pick_baseline(runs, "x")

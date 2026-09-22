@@ -67,9 +67,15 @@ Fork PRs (no secret) and suites with no baseline yet **skip cleanly** — the ga
 pip install git+https://github.com/egnaro9/prompt-regress
 EVAL_HISTORY_WRITE_KEY=... prompt-regress gate \
     --run eval_run.json --suite my-project \
-    --api https://eval-history.onrender.com
+    --api https://your-eval-history.example.com
 # prints the markdown verdict; exit code is 1 on a regression
 ```
+
+The public instance this was built against (`eval-history.onrender.com`) is retired.
+Point `--api` at your own [eval-history](https://github.com/egnaro9/eval-history)
+deployment, or set `$EVAL_HISTORY_API`. Its read routes also survive as a static
+archive at <https://erikhill.dev/eval-history/>, which the client detects and reads
+directly: baselines and comparisons work against it, storing a run does not.
 
 ## Why it's trustworthy
 

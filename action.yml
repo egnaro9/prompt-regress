@@ -14,9 +14,11 @@ inputs:
     description: Suite name (usually the run's `run` field / your project name).
     required: true
   api:
-    description: eval-history base URL.
-    required: false
-    default: https://eval-history.onrender.com
+    description: >-
+      eval-history base URL. The old public instance (eval-history.onrender.com) was
+      retired; point this at your own deployment. https://erikhill.dev/eval-history/
+      is a read-only archive of the original data: comparisons work, storing does not.
+    required: true
   write-key:
     description: >-
       eval-history write key. Pass a secret; empty (e.g. fork PRs) makes the gate
